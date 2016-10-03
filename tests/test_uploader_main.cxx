@@ -92,7 +92,7 @@ static EZ::Queue<Json::Value> callback_responses;
 #ifndef THREADED
 int main(int argc, char **argv)
 {
-    auto_ptr<habitat::Uploader> u;
+    unique_ptr<habitat::Uploader> u;
 
     for (;;)
     {
@@ -367,14 +367,14 @@ static r_string proxy_payload_telemetry(TestSubject *u, Json::Value command)
 static r_json proxy_flights(TestSubject *u)
 {
     vector<Json::Value> *result = u->flights();
-    auto_ptr< vector<Json::Value> > destroyer(result);
+    unique_ptr< vector<Json::Value> > destroyer(result);
     return vector_to_json(*result);
 }
 
 static r_json proxy_payloads(TestSubject *u)
 {
     vector<Json::Value> *result = u->payloads();
-    auto_ptr< vector<Json::Value> > destroyer(result);
+    unique_ptr< vector<Json::Value> > destroyer(result);
     return vector_to_json(*result);
 }
 #else /* defined THREADED */

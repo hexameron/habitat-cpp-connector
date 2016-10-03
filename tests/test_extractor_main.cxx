@@ -32,14 +32,14 @@ public:
 void handle_command(const Json::Value &command,
                     JsonIOExtractorManager &manager,
                     habitat::UKHASExtractor &extractor,
-                    auto_ptr<Json::Value> &current_payload);
+                    unique_ptr<Json::Value> &current_payload);
 
 int main(int argc, char **argv)
 {
     habitat::UploaderThread thread;
     JsonIOExtractorManager manager(thread);
     habitat::UKHASExtractor extractor;
-    auto_ptr<Json::Value> current_payload;
+    unique_ptr<Json::Value> current_payload;
 
     for (;;)
     {
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 void handle_command(const Json::Value &command,
                     JsonIOExtractorManager &manager,
                     habitat::UKHASExtractor &extractor,
-                    auto_ptr<Json::Value> &current_payload)
+                    unique_ptr<Json::Value> &current_payload)
 {
     string command_name = command[0u].asString();
     const Json::Value &arg = command[1u];

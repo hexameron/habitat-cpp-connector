@@ -152,7 +152,7 @@ public:
 class UploaderThread : public EZ::SimpleThread
 {
     EZ::Queue<UploaderAction *> queue;
-    auto_ptr<habitat::Uploader> uploader;
+    unique_ptr<habitat::Uploader> uploader;
 
     bool queued_shutdown;
 

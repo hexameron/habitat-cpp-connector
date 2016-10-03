@@ -32,7 +32,7 @@ ext_cxxfiles = src/Extractor.cxx src/UKHASExtractor.cxx \
 ext_binary = tests/extractor
 ext_mock_cflags = -include tests/test_extractor_mocks.h
 
-CXXFLAGS = $(CFLAGS)
+CXXFLAGS = $(CFLAGS) -std=c++11
 CXXFLAGS_JSONCPP = $(CFLAGS_JSONCPP)
 upl_objects = jsoncpp/jsoncpp.o $(patsubst %.cxx,%.o,$(upl_cxxfiles))
 ext_objects = jsoncpp/jsoncpp.o $(patsubst %.cxx,%.ext_mock.o,$(ext_cxxfiles))

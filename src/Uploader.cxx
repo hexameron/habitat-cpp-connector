@@ -231,10 +231,10 @@ vector<Json::Value> *Uploader::flights()
 
     Json::Value *response =
         database.view("flight", "end_start_including_payloads", options);
-    auto_ptr<Json::Value> response_destroyer(response);
+    unique_ptr<Json::Value> response_destroyer(response);
 
     vector<Json::Value> *result = new vector<Json::Value>;
-    auto_ptr< vector<Json::Value> > result_destroyer(result);
+    unique_ptr< vector<Json::Value> > result_destroyer(result);
 
     if (!response->isObject())
         throw runtime_error("Invalid response: was not an object");
@@ -295,10 +295,10 @@ vector<Json::Value> *Uploader::payloads()
 
     Json::Value *response =
         database.view("payload_configuration", "name_time_created", options);
-    auto_ptr<Json::Value> response_destroyer(response);
+    unique_ptr<Json::Value> response_destroyer(response);
 
     vector<Json::Value> *result = new vector<Json::Value>;
-    auto_ptr< vector<Json::Value> > result_destroyer(result);
+    unique_ptr< vector<Json::Value> > result_destroyer(result);
 
     if (!response->isObject())
         throw runtime_error("Invalid response: was not an object");

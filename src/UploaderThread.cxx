@@ -98,7 +98,7 @@ string UploaderListenerInfo::describe()
 void UploaderFlights::apply(UploaderThread &uthr)
 {
     check(uthr.uploader.get());
-    auto_ptr< vector<Json::Value> > flights;
+    unique_ptr< vector<Json::Value> > flights;
     flights.reset(uthr.uploader->flights());
     uthr.got_flights(*flights);
 }
@@ -111,7 +111,7 @@ string UploaderFlights::describe()
 void UploaderPayloads::apply(UploaderThread &uthr)
 {
     check(uthr.uploader.get());
-    auto_ptr< vector<Json::Value> > payloads;
+    unique_ptr< vector<Json::Value> > payloads;
     payloads.reset(uthr.uploader->payloads());
     uthr.got_payloads(*payloads);
 }
@@ -145,7 +145,7 @@ UploaderThread::~UploaderThread()
 
 void UploaderThread::queue_action(UploaderAction *action)
 {
-    auto_ptr<UploaderAction> destroyer(action);
+    unique_ptr<UploaderAction> destroyer(action);
 
     log("Queuing " + action->describe());
     queue.put(action);
@@ -212,7 +212,7 @@ void *UploaderThread::run()
 
     for (;;)
     {
-        auto_ptr<UploaderAction> action(queue.get());
+        unique_ptr<UploaderAction> action(queue.get());
 
         log("Running " + action->describe());
 

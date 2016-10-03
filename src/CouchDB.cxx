@@ -63,7 +63,7 @@ string Server::next_uuid()
         uuid_url.append("_uuids?count=100");
 
         Json::Value *root = get_json(uuid_url);
-        auto_ptr<Json::Value> value_destroyer(root);
+        unique_ptr<Json::Value> value_destroyer(root);
 
         const Json::Value &uuids = (*root)["uuids"];
         if (!uuids.isArray() || !uuids.size())
@@ -82,7 +82,7 @@ Json::Value *Server::get_json(const string &get_url)
 {
     Json::Reader reader;
     Json::Value *doc = new Json::Value;
-    auto_ptr<Json::Value> value_destroyer(doc);
+    unique_ptr<Json::Value> value_destroyer(doc);
 
     string response = curl.get(get_url);
 
