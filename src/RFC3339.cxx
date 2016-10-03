@@ -24,8 +24,10 @@
  * definitions are gone in pthreadsw32 2.9.1, and instead upstream
  * fldigi have rolled their own. These are in timeops.h, so include
  * that instead */
-#include "timeops.h"
 
+#ifdef __MINGW32__
+#include "timeops.h"
+#endif
 
 using namespace std;
 
