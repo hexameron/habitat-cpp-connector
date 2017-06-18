@@ -357,6 +357,7 @@ string cURL::perform(const string &url)
     setopt(CURLOPT_URL, url.c_str());
     setopt(CURLOPT_WRITEFUNCTION, write_func);
     setopt(CURLOPT_WRITEDATA, &response);
+    setopt(CURLOPT_TIMEOUT, 30);
 
     CURLcode result;
     result = curl_easy_perform(curl);
